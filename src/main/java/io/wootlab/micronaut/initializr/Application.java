@@ -1,4 +1,4 @@
-package micronaut.initializr;
+package io.wootlab.micronaut.initializr;
 
 import io.micronaut.runtime.Micronaut;
 
