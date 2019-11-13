@@ -21,7 +21,12 @@ public class Initializr {
     @Inject
     private CompressionService compressor;
 
+    @Inject
+    private SettingsValidator validator;
+
     public MicronautProject init(ProjectSettings projectSettings) throws IOException, InitializrException {
+
+        validator.validate(projectSettings);
 
         MicronautProject project = cliWrapper.generateProject(projectSettings);
 
