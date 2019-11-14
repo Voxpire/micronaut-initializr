@@ -10,8 +10,8 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class MicronautProject {
 
-    @NonNull private String uniqueName;
-    @NonNull private ProjectSettings settings;
+    @NonNull private final String uniqueName;
+    @NonNull private final ProjectSettings settings;
     private String packageName;
 
     private InputStream inputStream;

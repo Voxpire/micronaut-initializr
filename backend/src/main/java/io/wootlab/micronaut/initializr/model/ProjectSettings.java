@@ -1,19 +1,22 @@
 package io.wootlab.micronaut.initializr.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
+@AllArgsConstructor
 public class ProjectSettings {
 
     @NotEmpty(message = "GroupId can't be empty or null")
-    private String groupId;
+    private final String groupId;
 
     @NotEmpty(message = "ArtifactId can't be empty or null")
-    private String artifactId;
+    private final String artifactId;
 
     @NotNull(message = "BuildType can't be null")
-    private BuildType buildType;
+    private final BuildType buildType;
 }

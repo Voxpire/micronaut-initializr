@@ -13,11 +13,11 @@ import java.util.Date;
 
 @Singleton
 @Slf4j
-class MicronautCliWrapper {
+public class MicronautCliWrapper {
 
     private final MicronautCli cli = new MicronautCli();
 
-    MicronautProject generateProject(ProjectSettings settings){
+    public MicronautProject generateProject(ProjectSettings settings){
         var uniqueProjectName = createUniqueProjectName(settings.getArtifactId());
         var micronautCliArgs = buildCliCommand(settings).toArray(new String[0]);
 

@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import java.io.File;
 
 @MicronautTest
-class MicronautCliWrapperInitialzrTest extends AbstractInitialzrTest {
+public class MicronautCliWrapperInitialzrTest extends AbstractInitialzrTest {
 
     @Inject
     private MicronautCliWrapper cliWrapper;

@@ -15,27 +15,28 @@ import java.util.Arrays;
 @Slf4j
 public abstract class AbstractInitialzrTest {
 
-    static final String TEST_GROUP_ID = "io.wootlab";
-    static final String TEST_ARTIFACT_ID = "micronautinitializer";
+    protected static final String TEST_GROUP_ID = "io.wootlab";
+    protected static final String TEST_ARTIFACT_ID = "micronautinitializer";
 
     @AfterAll
-    public static void eraseGeneratedProjects(){
+    public static void eraseGeneratedProjects() {
         Arrays.asList(new File(".").listFiles()).stream()
-                .filter(file->file.getName().startsWith(TEST_ARTIFACT_ID))
+                .filter(file -> file.getName().startsWith(TEST_ARTIFACT_ID))
                 .forEach(file -> {
                     try {
                         FileUtils.deleteDirectory(file);
                     } catch (IOException e) {
-                        log.error("Error deleting project " + file.getName(), e);
+                        e.printStackTrace();
                     }
                 });
     }
 
-    protected ProjectSettings createProjectSettings(){
-        ProjectSettings settings = new ProjectSettings();
-        settings.setArtifactId(TEST_ARTIFACT_ID);
-        settings.setGroupId(TEST_GROUP_ID);
-        settings.setBuildType(BuildType.maven);
+    protected ProjectSettings createProjectSettings() {
+        ProjectSettings settings
+                = new ProjectSettings(
+                TEST_GROUP_ID,
+                TEST_ARTIFACT_ID,
+                BuildType.maven);
         return settings;
     }
 }

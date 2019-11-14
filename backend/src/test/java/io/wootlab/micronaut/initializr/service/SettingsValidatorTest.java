@@ -1,6 +1,7 @@
 package io.wootlab.micronaut.initializr.service;
 
 import io.micronaut.test.annotation.MicronautTest;
+import io.wootlab.micronaut.initializr.AbstractInitialzrTest;
 import io.wootlab.micronaut.initializr.model.BuildType;
 import io.wootlab.micronaut.initializr.model.ProjectSettings;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest
-class SettingsValidatorTest {
+class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Inject
     private SettingsValidator validator;
@@ -30,13 +31,15 @@ class SettingsValidatorTest {
 
     @Test
     void validate_emptyObject_shouldThrowException() {
-        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings()));
+        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings(null, null, null)));
     }
 
     @Test
     void validate_nullGroupId_shouldThrowException() {
-        ProjectSettings settings = fullProjectSettings();
-        settings.setGroupId(null);
+        ProjectSettings settings = new ProjectSettings(
+                null,
+                TEST_ARTIFACT_ID,
+                BuildType.maven);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -45,8 +48,10 @@ class SettingsValidatorTest {
 
     @Test
     void validate_emptyGroupId_shouldThrowException() {
-        ProjectSettings settings = fullProjectSettings();
-        settings.setGroupId("");
+        ProjectSettings settings = new ProjectSettings(
+                "",
+                TEST_ARTIFACT_ID,
+                BuildType.maven);
 
         ValidationException thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -56,8 +61,10 @@ class SettingsValidatorTest {
 
     @Test
     void validate_nullArtifactId_shouldThrowException() {
-        ProjectSettings settings = fullProjectSettings();
-        settings.setArtifactId(null);
+        ProjectSettings settings = new ProjectSettings(
+                TEST_GROUP_ID,
+                null,
+                BuildType.maven);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -66,8 +73,10 @@ class SettingsValidatorTest {
 
     @Test
     void validate_emptyArtifactId_shouldThrowException() {
-        ProjectSettings settings = fullProjectSettings();
-        settings.setArtifactId("");
+        ProjectSettings settings = new ProjectSettings(
+                TEST_GROUP_ID,
+                "",
+                BuildType.maven);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -76,22 +85,13 @@ class SettingsValidatorTest {
 
     @Test
     void validate_nullBuildType_shouldThrowException() {
-        ProjectSettings settings = fullProjectSettings();
-        settings.setBuildType(null);
+        ProjectSettings settings = new ProjectSettings(
+                TEST_GROUP_ID,
+                TEST_ARTIFACT_ID,
+               null);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
         assertTrue(thrown.getMessage().contains("BuildType can't be"));
     }
-
-
-
-    public static ProjectSettings fullProjectSettings() {
-        ProjectSettings settings = new ProjectSettings();
-        settings.setGroupId("foo");
-        settings.setArtifactId("bar");
-        settings.setBuildType(BuildType.gradle);
-        return settings;
-    }
-
 }

@@ -1,9 +1,10 @@
-package io.wootlab.micronaut.initializr.service;
+package io.wootlab.micronaut.initializr.service.patcher;
 
 import io.micronaut.test.annotation.MicronautTest;
 import io.wootlab.micronaut.initializr.AbstractInitialzrTest;
 import io.wootlab.micronaut.initializr.exception.InitializrException;
 import io.wootlab.micronaut.initializr.model.MicronautProject;
+import io.wootlab.micronaut.initializr.service.MicronautCliWrapper;
 import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +14,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @MicronautTest
-class MicronautProjectPatcherTest extends AbstractInitialzrTest {
+class PatcherWrapperTest extends AbstractInitialzrTest {
 
     @Inject
-    private MicronautProjectPatcher patcher;
+    private PatcherWrapper patcher;
 
     @Inject
     private MicronautCliWrapper wrapper;

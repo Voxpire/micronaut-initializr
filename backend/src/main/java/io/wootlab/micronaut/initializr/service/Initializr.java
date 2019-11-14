@@ -3,6 +3,7 @@ package io.wootlab.micronaut.initializr.service;
 import io.wootlab.micronaut.initializr.exception.InitializrException;
 import io.wootlab.micronaut.initializr.model.MicronautProject;
 import io.wootlab.micronaut.initializr.model.ProjectSettings;
+import io.wootlab.micronaut.initializr.service.patcher.PatcherWrapper;
 import org.codehaus.plexus.util.FileUtils;
 
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ public class Initializr {
     private MicronautCliWrapper cliWrapper;
 
     @Inject
-    private MicronautProjectPatcher patcher;
+    private PatcherWrapper patcher;
 
     @Inject
     private CompressionService compressor;
