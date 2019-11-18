@@ -31,7 +31,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_emptyObject_shouldThrowException() {
-        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings(null, null, null)));
+        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings(null, null, null, null, null)));
     }
 
     @Test
@@ -39,7 +39,9 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
         ProjectSettings settings = new ProjectSettings(
                 null,
                 TEST_ARTIFACT_ID,
-                BuildType.maven);
+                BuildType.maven,
+                "",
+                "");
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -51,7 +53,8 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
         ProjectSettings settings = new ProjectSettings(
                 "",
                 TEST_ARTIFACT_ID,
-                BuildType.maven);
+                BuildType.maven,
+                "","");
 
         ValidationException thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -64,7 +67,8 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
         ProjectSettings settings = new ProjectSettings(
                 TEST_GROUP_ID,
                 null,
-                BuildType.maven);
+                BuildType.maven,
+                "","");
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -76,7 +80,8 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
         ProjectSettings settings = new ProjectSettings(
                 TEST_GROUP_ID,
                 "",
-                BuildType.maven);
+                BuildType.maven,
+                "","");
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -88,7 +93,8 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
         ProjectSettings settings = new ProjectSettings(
                 TEST_GROUP_ID,
                 TEST_ARTIFACT_ID,
-               null);
+               null,
+                "","");
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 

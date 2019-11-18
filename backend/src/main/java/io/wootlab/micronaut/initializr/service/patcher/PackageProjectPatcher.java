@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Singleton
 @Slf4j
-public class PackageProjectPatcher implements ProjectPatcher {
+class PackageProjectPatcher implements ProjectPatcher {
 
     @Override
     public void patchProject(MicronautProject project) throws InitializrException {

@@ -36,7 +36,9 @@ public abstract class AbstractInitialzrTest {
                 = new ProjectSettings(
                 TEST_GROUP_ID,
                 TEST_ARTIFACT_ID,
-                BuildType.maven);
+                BuildType.maven,
+                "1.0",
+                "com.test");
         return settings;
     }
 }

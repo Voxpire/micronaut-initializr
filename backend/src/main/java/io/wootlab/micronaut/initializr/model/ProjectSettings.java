@@ -19,4 +19,10 @@ public class ProjectSettings {
 
     @NotNull(message = "BuildType can't be null")
     private final BuildType buildType;
+
+    @NotNull(message = "Version can't be null")
+    private final String version;
+
+    @NotNull(message = "PAckageName can't be null")
+    private final String packageName;
 }
