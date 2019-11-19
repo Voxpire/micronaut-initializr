@@ -2,10 +2,10 @@ package io.wootlab.micronaut.initializr.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,6 +23,8 @@ public class ProjectSettings {
     @NotNull(message = "Version can't be null")
     private final String version;
 
-    @NotNull(message = "PAckageName can't be null")
+    @NotNull(message = "PackageName can't be null")
     private final String packageName;
+
+    private final List<Feature> features;
 }

@@ -28,6 +28,7 @@ class MavenProjectPatcher implements ProjectPatcher {
 
     private static final String PROJECT_ARTIFACT_ID_MVN = "/project/artifactId/text()";
     private static final String PROJECT_GROUP_ID_MVN = "/project/groupId/text()";
+    private static final String PROJECT_VERSION_MVN = "/project/version/text()";
     private static final String MAIN_CLASS_ID_MVN = "/project/properties/exec.mainClass/text()";
 
     @Override
@@ -41,6 +42,7 @@ class MavenProjectPatcher implements ProjectPatcher {
             replaceField(doc, xpath, PROJECT_ARTIFACT_ID_MVN, project.getSettings().getArtifactId());
             replaceField(doc, xpath, PROJECT_GROUP_ID_MVN, project.getSettings().getGroupId());
             replaceField(doc, xpath, MAIN_CLASS_ID_MVN, project.getPackageName() + ".Application");
+            replaceField(doc, xpath, PROJECT_VERSION_MVN, project.getSettings().getVersion());
 
             Transformer xformer = TransformerFactory.newInstance().newTransformer();
             xformer.transform(new DOMSource(doc), new StreamResult(pom));

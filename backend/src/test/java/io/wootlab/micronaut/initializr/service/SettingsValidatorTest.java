@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 import javax.validation.ValidationException;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,7 +33,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_emptyObject_shouldThrowException() {
-        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings(null, null, null, null, null)));
+        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings(null, null, null, null, null, null)));
     }
 
     @Test
@@ -40,8 +42,8 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
                 null,
                 TEST_ARTIFACT_ID,
                 BuildType.maven,
-                "",
-                "");
+                "test",
+                "test", Collections.EMPTY_LIST);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -54,7 +56,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
                 "",
                 TEST_ARTIFACT_ID,
                 BuildType.maven,
-                "","");
+                "test", "test", Collections.EMPTY_LIST);
 
         ValidationException thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -68,7 +70,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
                 TEST_GROUP_ID,
                 null,
                 BuildType.maven,
-                "","");
+                "test", "test", Collections.EMPTY_LIST);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -81,7 +83,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
                 TEST_GROUP_ID,
                 "",
                 BuildType.maven,
-                "","");
+                "test", "test", Collections.EMPTY_LIST);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
@@ -93,11 +95,39 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
         ProjectSettings settings = new ProjectSettings(
                 TEST_GROUP_ID,
                 TEST_ARTIFACT_ID,
-               null,
-                "","");
+                null,
+                "test", "test",
+                Collections.EMPTY_LIST);
 
         Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
 
         assertTrue(thrown.getMessage().contains("BuildType can't be"));
     }
+
+    @Test
+    void validate_nullVersion_shouldThrowException() {
+        ProjectSettings settings = new ProjectSettings(
+                TEST_GROUP_ID,
+                null,
+                BuildType.maven,
+                null, "test", Collections.EMPTY_LIST);
+
+        Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
+
+        assertTrue(thrown.getMessage().contains("Version can't be"));
+    }
+
+    @Test
+    void validate_nullPackage_shouldThrowException() {
+        ProjectSettings settings = new ProjectSettings(
+                TEST_GROUP_ID,
+                null,
+                BuildType.maven,
+                "", null, Collections.EMPTY_LIST);
+
+        Exception thrown = Assertions.assertThrows(ValidationException.class, () -> validator.validate(settings));
+
+        assertTrue(thrown.getMessage().contains("PackageName can't be"));
+    }
+
 }

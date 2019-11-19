@@ -1,7 +1,9 @@
 package io.wootlab.micronaut.initializr.service.patcher;
 
+import io.micronaut.core.util.StringUtils;
 import io.wootlab.micronaut.initializr.exception.InitializrException;
 import io.wootlab.micronaut.initializr.model.MicronautProject;
+import io.wootlab.micronaut.initializr.model.ProjectSettings;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -19,7 +21,7 @@ class PackageProjectPatcher implements ProjectPatcher {
 
     @Override
     public void patchProject(MicronautProject project) throws InitializrException {
-        project.setPackageName(project.getSettings().getGroupId() + "." + formatArtifactToPackageName(project.getSettings().getArtifactId()));
+        project.setPackageName(project.getSettings().getGroupId() + "." + formatArtifactToPackageName(project.getSettings()));
         AtomicReference pathToParent = new AtomicReference(project.getUniqueName() + File.separator + "src" + File.separator + "main" + File.separator + "java");
         File oldPackage = new File(pathToParent + File.separator + project.getUniqueName());
 
@@ -55,7 +57,10 @@ class PackageProjectPatcher implements ProjectPatcher {
             throw new InitializrException(e.getMessage(), e.getClass().getSimpleName(), e.getCause());
         }
     }
-    private String formatArtifactToPackageName(String artifactId) {
-        return artifactId.replaceAll("-", "");
+    private String formatArtifactToPackageName(ProjectSettings settings) {
+        if(StringUtils.isNotEmpty(settings.getPackageName())){
+            return settings.getPackageName();
+        }
+        return settings.getArtifactId().replaceAll("-", "");
     }
 }

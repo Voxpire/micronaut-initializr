@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 
 @MicronautTest
 @Slf4j
@@ -38,7 +39,7 @@ public abstract class AbstractInitialzrTest {
                 TEST_ARTIFACT_ID,
                 BuildType.maven,
                 "1.0",
-                "com.test");
+                "com.test", Collections.EMPTY_LIST);
         return settings;
     }
 }
