@@ -1,5 +1,6 @@
 package io.wootlab.micronaut.initializr.model;
 
+import io.wootlab.micronaut.initializr.representation.FeatureRepresentation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -81,4 +82,8 @@ public enum Feature {
 
     private String value;
     private String description;
+
+    public FeatureRepresentation toFeatureRepresentation(){
+        return new FeatureRepresentation(value, description);
+    }
 }

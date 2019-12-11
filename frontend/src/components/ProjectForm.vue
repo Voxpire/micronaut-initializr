@@ -2,30 +2,32 @@
   <div>
     <div class="mi-form-container">
       <div class="container center row">
-        <div class="title">Create a new project</div>
-        <div class="col l5 m12 s12">
+        <div class="title">Create a new Micronaut project</div>
+        <div class="col l5 m12 s12 gray black-text">
           <div class="subtitle">Configuration</div>
           <div class="row">
             <div class="input-field">
-              <input id="groupId" type="text" placeholder="Group ID">
+              <input id="groupId" type="text" placeholder="Group ID" autocomplete="off">
             </div>
           </div>
           <div class="row">
             <div class="input-field">
-              <input id="artifactId" type="text" placeholder="Artifact ID">
+              <input id="artifactId" type="text" placeholder="Artifact ID" autocomplete="off">
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 no-padding">
               <select id="buildType" type="text">
                 <option>Maven</option>
                 <option>Gradle</option>
               </select>
             </div>
           </div>
-          <a class="more-config">
-            More configurations
-          </a>
+          <div class="more-config-container">
+            <a class="more-config">
+              More configurations
+            </a>
+          </div>
         </div>
         <div class="col l7 m12 s12">
           <div class="subtitle">Additional modules</div>
@@ -33,6 +35,17 @@
             <div class="input-field col s12">
               <i class="material-icons prefix">search</i>
               <input id="icon_prefix" type="text" class="search" placeholder="Search for a module...">
+              <div v-for="feature in features.slice(0,10)" v-bind:key="feature.name" class="feature">
+                <div>
+                  <p>
+                    <label>
+                      <input type="checkbox" class="filled-in" checked="checked" />
+                      <span class="feature-name">{{feature.name}}</span>
+                    </label>
+                  </p>
+                </div>
+                <div class="feature-description">{{feature.description}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -50,6 +63,7 @@
 
 <script>
   import M from 'materialize-css'
+  import axios from 'axios';
 
   export default {
     name: 'ProjectForm',
@@ -61,6 +75,12 @@
     mounted() {
       M.updateTextFields();
       M.FormSelect.init(document.querySelectorAll('select'), null);
+      axios
+        .get('http://localhost:8080/features')
+        .then(response => {
+            this.features = response.data;
+          }
+        )
     },
   }
 </script>
@@ -118,8 +138,37 @@
     font-size: 12px !important;
   }
 
+  .more-config-container {
+    margin-bottom: 20px;
+  }
+
   .more-config:hover {
     cursor: pointer;
     text-decoration: underline;
   }
+
+  .feature {
+    padding-left: 20px;
+    text-align: left;
+    margin-bottom:10px;
+
+  }
+
+  .feature-name{
+    line-height: 18px !important;
+    font-size:16px !important;
+    font-weight:bold;
+
+  }
+
+  .feature-description{
+    padding-left:35px;
+    margin-top:-15px;
+    font-size:13px;
+    color:lightgray;
+    padding-bottom:8px;
+    border-bottom: 1px dashed lightgray;
+    margin-bottom:8px;
+  }
+
 </style>

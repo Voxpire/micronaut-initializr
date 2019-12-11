@@ -1,5 +1,5 @@
 package io.wootlab.micronaut.initializr.service;
 
-class CompressionServiceTest {
+public class CompressionServiceTest {
 
 }

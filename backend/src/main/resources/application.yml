@@ -1,3 +1,6 @@
 micronaut:
   application:
     name: micronaut-initializr
+  server:
+    cors:
+      enabled: true
