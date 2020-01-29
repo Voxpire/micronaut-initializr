@@ -28,9 +28,10 @@ public class MicronautCliWrapper {
     }
 
     CliCommand buildCliCommand(ProjectSettings settings){
-        return CliCommandBuilder.init(settings.getArtifactId())
-                .withBuildType(settings.getBuildType())
-                .build();
+        var builder = CliCommandBuilder.init(settings.getArtifactId())
+                .withBuildType(settings.getBuildType());
+        settings.getFeatures().stream().forEach(feature -> builder.withFeature(feature));
+        return builder.build();
     }
 
     private String createUniqueProjectName(String groupId) {

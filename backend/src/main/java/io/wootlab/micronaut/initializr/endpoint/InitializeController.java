@@ -1,6 +1,7 @@
 package io.wootlab.micronaut.initializr.endpoint;
 
 import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
@@ -26,7 +27,7 @@ public class InitializeController {
     private Initializr initializr;
 
     @Post("/initialize")
-    public StreamedFile initialize(@Valid ProjectSettings projectSettings) throws IOException, InitializrException {
+    public StreamedFile initialize(@Valid @Body ProjectSettings projectSettings) throws IOException, InitializrException {
         MicronautProject project = initializr.init(projectSettings);
         return new StreamedFile(project.getInputStream(), MediaType.TEXT_PLAIN_TYPE)
                 .attach(project.getSettings().getGroupId() + ".zip");
