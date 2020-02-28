@@ -1,4 +1,4 @@
-package io.wootlab.micronaut.initializr.exception;
+package io.wootlab.micronaut.initializr.initialization.model;
 
 public class InitializrException extends Exception {
     private String initialType;

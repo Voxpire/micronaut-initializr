@@ -1,8 +1,8 @@
 package io.wootlab.micronaut.initializr;
 
 import io.micronaut.test.annotation.MicronautTest;
-import io.wootlab.micronaut.initializr.model.BuildType;
-import io.wootlab.micronaut.initializr.model.ProjectSettings;
+import io.wootlab.micronaut.initializr.referential.BuildType;
+import io.wootlab.micronaut.initializr.api.representation.ProjectSettingsRepresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.AfterAll;
@@ -32,9 +32,9 @@ public abstract class AbstractInitialzrTest {
                 });
     }
 
-    protected ProjectSettings createProjectSettings() {
-        ProjectSettings settings
-                = new ProjectSettings(
+    protected ProjectSettingsRepresentation createProjectSettings() {
+        ProjectSettingsRepresentation settings
+                = new ProjectSettingsRepresentation(
                 TEST_GROUP_ID,
                 TEST_ARTIFACT_ID,
                 BuildType.maven,

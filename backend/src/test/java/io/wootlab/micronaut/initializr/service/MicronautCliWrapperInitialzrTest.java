@@ -2,8 +2,9 @@ package io.wootlab.micronaut.initializr.service;
 
 import io.micronaut.test.annotation.MicronautTest;
 import io.wootlab.micronaut.initializr.AbstractInitialzrTest;
-import io.wootlab.micronaut.initializr.model.CliCommand;
-import io.wootlab.micronaut.initializr.model.MicronautProject;
+import io.wootlab.micronaut.initializr.initialization.CliCommandBuilder;
+import io.wootlab.micronaut.initializr.initialization.MicronautCliWrapper;
+import io.wootlab.micronaut.initializr.initialization.model.MicronautProject;
 import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class MicronautCliWrapperInitialzrTest extends AbstractInitialzrTest {
 
     @Test
     void buildCommandCli(){
-        CliCommand command = cliWrapper.buildCliCommand(createProjectSettings());
+        CliCommandBuilder.CliCommand command = cliWrapper.buildCliCommand(createProjectSettings());
         Assert.assertEquals(4, command.size());
     }
 

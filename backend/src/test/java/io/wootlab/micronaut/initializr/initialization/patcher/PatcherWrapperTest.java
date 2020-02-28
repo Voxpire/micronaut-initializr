@@ -1,10 +1,10 @@
-package io.wootlab.micronaut.initializr.service.patcher;
+package io.wootlab.micronaut.initializr.initialization.patcher;
 
 import io.micronaut.test.annotation.MicronautTest;
 import io.wootlab.micronaut.initializr.AbstractInitialzrTest;
-import io.wootlab.micronaut.initializr.exception.InitializrException;
-import io.wootlab.micronaut.initializr.model.MicronautProject;
-import io.wootlab.micronaut.initializr.service.MicronautCliWrapper;
+import io.wootlab.micronaut.initializr.initialization.model.InitializrException;
+import io.wootlab.micronaut.initializr.initialization.model.MicronautProject;
+import io.wootlab.micronaut.initializr.initialization.MicronautCliWrapper;
 import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 

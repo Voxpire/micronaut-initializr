@@ -1,10 +1,8 @@
-package io.wootlab.micronaut.initializr.service;
+package io.wootlab.micronaut.initializr.initialization;
 
 import io.micronaut.cli.MicronautCli;
-import io.wootlab.micronaut.initializr.builder.CliCommandBuilder;
-import io.wootlab.micronaut.initializr.model.CliCommand;
-import io.wootlab.micronaut.initializr.model.MicronautProject;
-import io.wootlab.micronaut.initializr.model.ProjectSettings;
+import io.wootlab.micronaut.initializr.api.representation.ProjectSettingsRepresentation;
+import io.wootlab.micronaut.initializr.initialization.model.MicronautProject;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Singleton;
@@ -17,7 +15,7 @@ public class MicronautCliWrapper {
 
     private final MicronautCli cli = new MicronautCli();
 
-    public MicronautProject generateProject(ProjectSettings settings){
+    public MicronautProject generateProject(ProjectSettingsRepresentation settings){
         var uniqueProjectName = createUniqueProjectName(settings.getArtifactId());
         var micronautCliArgs = buildCliCommand(settings).toArray(new String[0]);
 
@@ -27,7 +25,7 @@ public class MicronautCliWrapper {
         return new MicronautProject(uniqueProjectName, settings);
     }
 
-    CliCommand buildCliCommand(ProjectSettings settings){
+    public CliCommandBuilder.CliCommand buildCliCommand(ProjectSettingsRepresentation settings){
         var builder = CliCommandBuilder.init(settings.getArtifactId())
                 .withBuildType(settings.getBuildType());
         settings.getFeatures().stream().forEach(feature -> builder.withFeature(feature));

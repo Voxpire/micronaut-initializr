@@ -1,9 +1,9 @@
-package io.wootlab.micronaut.initializr.service.patcher;
+package io.wootlab.micronaut.initializr.initialization.patcher;
 
 import io.micronaut.core.util.StringUtils;
-import io.wootlab.micronaut.initializr.exception.InitializrException;
-import io.wootlab.micronaut.initializr.model.MicronautProject;
-import io.wootlab.micronaut.initializr.model.ProjectSettings;
+import io.wootlab.micronaut.initializr.initialization.model.InitializrException;
+import io.wootlab.micronaut.initializr.initialization.model.MicronautProject;
+import io.wootlab.micronaut.initializr.api.representation.ProjectSettingsRepresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.plexus.util.FileUtils;
 
@@ -21,7 +21,7 @@ class PackageProjectPatcher implements ProjectPatcher {
 
     @Override
     public void patchProject(MicronautProject project) throws InitializrException {
-        project.setPackageName(project.getSettings().getGroupId() + "." + formatArtifactToPackageName(project.getSettings()));
+        project.setPackageName(formatArtifactToPackageName(project.getSettings()));
         AtomicReference pathToParent = new AtomicReference(project.getUniqueName() + File.separator + "src" + File.separator + "main" + File.separator + "java");
         File oldPackage = new File(pathToParent + File.separator + project.getUniqueName());
 
@@ -57,7 +57,7 @@ class PackageProjectPatcher implements ProjectPatcher {
             throw new InitializrException(e.getMessage(), e.getClass().getSimpleName(), e.getCause());
         }
     }
-    private String formatArtifactToPackageName(ProjectSettings settings) {
+    private String formatArtifactToPackageName(ProjectSettingsRepresentation settings) {
         if(StringUtils.isNotEmpty(settings.getPackageName())){
             return settings.getPackageName();
         }

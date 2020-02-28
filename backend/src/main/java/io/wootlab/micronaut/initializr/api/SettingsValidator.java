@@ -1,6 +1,6 @@
-package io.wootlab.micronaut.initializr.service;
+package io.wootlab.micronaut.initializr.api;
 
-import io.wootlab.micronaut.initializr.model.ProjectSettings;
+import io.wootlab.micronaut.initializr.api.representation.ProjectSettingsRepresentation;
 
 import javax.inject.Singleton;
 import javax.validation.ConstraintViolation;
@@ -15,9 +15,9 @@ public class SettingsValidator {
 
     private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-    public void validate(ProjectSettings settings) throws ValidationException {
+    public void validate(ProjectSettingsRepresentation settings) throws ValidationException {
         try {
-            Set<ConstraintViolation<ProjectSettings>> violations = validator.validate(settings);
+            Set<ConstraintViolation<ProjectSettingsRepresentation>> violations = validator.validate(settings);
             if (violations.size() > 0) {
                 String validationErrors = violations.stream()
                         .map(

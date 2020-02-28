@@ -1,5 +1,7 @@
-package io.wootlab.micronaut.initializr.model;
+package io.wootlab.micronaut.initializr.api.representation;
 
+import io.wootlab.micronaut.initializr.referential.BuildType;
+import io.wootlab.micronaut.initializr.referential.Feature;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjectSettings {
+public class ProjectSettingsRepresentation {
 
     @NotEmpty(message = "GroupId can't be empty or null")
     private String groupId;

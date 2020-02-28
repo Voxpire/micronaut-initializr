@@ -2,8 +2,9 @@ package io.wootlab.micronaut.initializr.service;
 
 import io.micronaut.test.annotation.MicronautTest;
 import io.wootlab.micronaut.initializr.AbstractInitialzrTest;
-import io.wootlab.micronaut.initializr.model.BuildType;
-import io.wootlab.micronaut.initializr.model.ProjectSettings;
+import io.wootlab.micronaut.initializr.api.SettingsValidator;
+import io.wootlab.micronaut.initializr.referential.BuildType;
+import io.wootlab.micronaut.initializr.api.representation.ProjectSettingsRepresentation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,12 +34,12 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_emptyObject_shouldThrowException() {
-        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettings(null, null, null, null, null, null)));
+        Assertions.assertThrows(ValidationException.class, () -> validator.validate(new ProjectSettingsRepresentation(null, null, null, null, null, null)));
     }
 
     @Test
     void validate_nullGroupId_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 null,
                 TEST_ARTIFACT_ID,
                 BuildType.maven,
@@ -52,7 +53,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_emptyGroupId_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 "",
                 TEST_ARTIFACT_ID,
                 BuildType.maven,
@@ -66,7 +67,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_nullArtifactId_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 TEST_GROUP_ID,
                 null,
                 BuildType.maven,
@@ -79,7 +80,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_emptyArtifactId_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 TEST_GROUP_ID,
                 "",
                 BuildType.maven,
@@ -92,7 +93,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_nullBuildType_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 TEST_GROUP_ID,
                 TEST_ARTIFACT_ID,
                 null,
@@ -106,7 +107,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_nullVersion_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 TEST_GROUP_ID,
                 null,
                 BuildType.maven,
@@ -119,7 +120,7 @@ class SettingsValidatorTest extends AbstractInitialzrTest {
 
     @Test
     void validate_nullPackage_shouldThrowException() {
-        ProjectSettings settings = new ProjectSettings(
+        ProjectSettingsRepresentation settings = new ProjectSettingsRepresentation(
                 TEST_GROUP_ID,
                 null,
                 BuildType.maven,

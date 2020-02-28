@@ -1,9 +1,9 @@
 package io.wootlab.micronaut.initializr.builder;
 
 import io.micronaut.test.annotation.MicronautTest;
-import io.wootlab.micronaut.initializr.model.BuildType;
-import io.wootlab.micronaut.initializr.model.CliCommand;
-import io.wootlab.micronaut.initializr.model.Feature;
+import io.wootlab.micronaut.initializr.initialization.CliCommandBuilder;
+import io.wootlab.micronaut.initializr.referential.BuildType;
+import io.wootlab.micronaut.initializr.referential.Feature;
 import junit.framework.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class CliCommandBuilderTest {
     @Test
     public void emptyBuild(){
 
-        CliCommand command = CliCommandBuilder.init("test").build();
+        CliCommandBuilder.CliCommand command = CliCommandBuilder.init("test").build();
 
         Assert.assertEquals(2, command.size());
         Assert.assertEquals(CliCommandBuilder.CREATE_APP_COMMAND, command.get(0));
@@ -33,7 +33,7 @@ public class CliCommandBuilderTest {
 
     @Test
     public void buildType(){
-        CliCommand command = CliCommandBuilder.init("test")
+        CliCommandBuilder.CliCommand command = CliCommandBuilder.init("test")
                 .withBuildType(BuildType.gradle).build();
 
         Assert.assertEquals(4, command.size());
@@ -43,7 +43,7 @@ public class CliCommandBuilderTest {
 
     @Test
     public void feature(){
-        CliCommand command = CliCommandBuilder.init("test")
+        CliCommandBuilder.CliCommand command = CliCommandBuilder.init("test")
                 .withFeature(Feature.kafka).build();
         Assert.assertEquals(4, command.size());
         Assert.assertEquals("-f", command.get(2));

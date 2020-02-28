@@ -1,7 +1,8 @@
 package io.wootlab.micronaut.initializr.service;
 
 import io.wootlab.micronaut.initializr.AbstractInitialzrTest;
-import io.wootlab.micronaut.initializr.exception.InitializrException;
+import io.wootlab.micronaut.initializr.initialization.Initializr;
+import io.wootlab.micronaut.initializr.initialization.model.InitializrException;
 import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 

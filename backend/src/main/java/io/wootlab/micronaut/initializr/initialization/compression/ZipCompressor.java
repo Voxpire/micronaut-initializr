@@ -1,6 +1,6 @@
-package io.wootlab.micronaut.initializr.service;
+package io.wootlab.micronaut.initializr.initialization.compression;
 
-import io.wootlab.micronaut.initializr.model.MicronautProject;
+import io.wootlab.micronaut.initializr.initialization.model.MicronautProject;
 
 import javax.inject.Singleton;
 import java.io.*;
@@ -11,17 +11,13 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 @Singleton
-class CompressionService {
+public class ZipCompressor implements Compressor {
 
-    enum CompressionType{
-        zip
+    public InputStream compressProject(MicronautProject project) throws IOException {
+        return compressProject(project, Compressor.CompressionType.zip);
     }
 
-    InputStream compressProject(MicronautProject project) throws IOException {
-        return compressProject(project,CompressionType.zip);
-    }
-
-    private InputStream compressProject(MicronautProject project, CompressionType compressionType) throws IOException {
+    private InputStream compressProject(MicronautProject project, Compressor.CompressionType compressionType) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ZipOutputStream zipOutputStream = new ZipOutputStream( baos);
 

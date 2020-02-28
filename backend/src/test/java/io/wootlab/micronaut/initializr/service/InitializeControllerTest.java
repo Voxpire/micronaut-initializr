@@ -5,15 +5,12 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.http.client.RxHttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.test.annotation.MicronautTest;
-import io.wootlab.micronaut.initializr.model.Feature;
-import io.wootlab.micronaut.initializr.representation.FeatureRepresentation;
+import io.wootlab.micronaut.initializr.referential.Feature;
+import io.wootlab.micronaut.initializr.api.representation.FeatureRepresentation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 @MicronautTest
 public class InitializeControllerTest {

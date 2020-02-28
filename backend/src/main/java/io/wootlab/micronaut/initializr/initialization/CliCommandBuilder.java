@@ -1,13 +1,15 @@
-package io.wootlab.micronaut.initializr.builder;
+package io.wootlab.micronaut.initializr.initialization;
 
 import io.micronaut.core.util.StringUtils;
-import io.wootlab.micronaut.initializr.model.BuildType;
-import io.wootlab.micronaut.initializr.model.CliCommand;
-import io.wootlab.micronaut.initializr.model.Feature;
+import io.wootlab.micronaut.initializr.referential.BuildType;
+import io.wootlab.micronaut.initializr.referential.Feature;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 public class CliCommandBuilder {
+
+    public class CliCommand extends ArrayList<String> {}
 
     private CliCommand command;
     public final static String CREATE_APP_COMMAND = "create-app";

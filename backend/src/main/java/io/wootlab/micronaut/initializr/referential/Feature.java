@@ -1,6 +1,6 @@
-package io.wootlab.micronaut.initializr.model;
+package io.wootlab.micronaut.initializr.referential;
 
-import io.wootlab.micronaut.initializr.representation.FeatureRepresentation;
+import io.wootlab.micronaut.initializr.api.representation.FeatureRepresentation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

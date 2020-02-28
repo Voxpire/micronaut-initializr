@@ -1,7 +1,7 @@
-package io.wootlab.micronaut.initializr.service.patcher;
+package io.wootlab.micronaut.initializr.initialization.patcher;
 
-import io.wootlab.micronaut.initializr.exception.InitializrException;
-import io.wootlab.micronaut.initializr.model.MicronautProject;
+import io.wootlab.micronaut.initializr.initialization.model.InitializrException;
+import io.wootlab.micronaut.initializr.initialization.model.MicronautProject;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
